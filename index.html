@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Recuerdo de Graduación</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}:root{--gold:#C9A86A;--white:#fff}body{font-family:'Inter',sans-serif;background:#000;color:var(--white);overflow-x:hidden}
+.hero{position:relative;width:100%;height:100svh;min-height:640px;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between}
+.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 35%;transform:scale(1.08);animation:zoomOut 2.2s cubic-bezier(.22,1,.36,1) forwards}
+@keyframes zoomOut{to{transform:scale(1)}}
+.hero::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.45) 0%,rgba(0,0,0,0) 18%),linear-gradient(to top,rgba(0,0,0,.94) 0%,rgba(0,0,0,.72) 22%,rgba(0,0,0,.25) 48%,rgba(0,0,0,0) 68%)}
+.hero-top{position:relative;z-index:2;width:100%;max-width:1180px;margin:0 auto;padding:28px 24px 0;display:flex;justify-content:center}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:14px;font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:#fff;font-weight:500;text-shadow:0 2px 12px rgba(0,0,0,.6)}
+.hero-eyebrow::before,.hero-eyebrow::after{content:'';width:34px;height:1px;background:var(--gold)}
+.hero-center{flex:1}.hero-bottom{position:relative;z-index:2;width:100%;max-width:1180px;margin:0 auto;padding:0 24px 32px;text-align:center}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(38px,6.8vw,74px);line-height:.95;font-weight:600;letter-spacing:-.02em;margin:0 0 12px;text-shadow:0 4px 30px rgba(0,0,0,.6)}
+.hero h1 span{display:block;font-style:italic;font-weight:500;color:var(--gold)}
+.hero p{max-width:580px;margin:0 auto;font-size:clamp(14px,1.8vw,16px);line-height:1.6;font-weight:300;color:rgba(255,255,255,.86)}
+.hero-meta{margin-top:16px;display:flex;justify-content:center;gap:10px;flex-wrap:wrap;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.7)}
+.hero-meta b{color:#fff;font-weight:600}.hero-meta i{font-style:normal;opacity:.4}
+.scroll-indicator{margin:22px auto 0;width:fit-content;display:flex;flex-direction:column;align-items:center;gap:8px;cursor:pointer;background:none;border:none;color:#fff}
+.scroll-arrow{width:46px;height:46px;border:1px solid rgba(255,255,255,.35);border-radius:50%;display:grid;place-items:center;animation:float 2s ease-in-out infinite;backdrop-filter:blur(6px);background:rgba(255,255,255,.06)}
+.scroll-arrow svg{width:18px;height:18px;stroke:#fff;stroke-width:1.6;fill:none;stroke-linecap:round;stroke-linejoin:round}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
+.gallery-section{background:#0B0B0C;padding:84px 24px 92px}.gallery-wrap{max-width:1180px;margin:0 auto}
+.gallery-header{text-align:center;max-width:700px;margin:0 auto 48px}
+.gallery-header h2{font-family:'Playfair Display',serif;font-size:clamp(32px,4.5vw,48px);line-height:1.05;font-weight:600;margin:16px 0}
+.gallery-header h2 em{font-style:italic;font-weight:500;color:var(--gold)}
+.gallery-header p{color:#a1a1aa;font-size:15.5px;line-height:1.75;font-weight:300;text-align:justify;text-justify:inter-word;hyphens:auto}
+.gallery-date{margin-top:18px;display:inline-flex;align-items:center;gap:10px;padding:8px 16px;border:1px solid rgba(255,255,255,.1);border-radius:100px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.8);background:rgba(255,255,255,.03)}
+.gallery-date b{color:var(--gold)}
+.gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.gallery-item{position:relative;overflow:hidden;border-radius:16px;aspect-ratio:4/5;cursor:pointer;background:#1a1a1a;border:1px solid rgba(255,255,255,.08)}
+.gallery-item img,.gallery-item video{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s}
+.gallery-item:hover img,.gallery-item:hover video{transform:scale(1.07)}
+.pagination{margin-top:34px;display:flex;justify-content:center;align-items:center;gap:10px;flex-wrap:wrap}
+.pagination button{min-width:42px;height:42px;padding:0 12px;border-radius:100px;cursor:pointer;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.05);color:#fff;font-size:14px;font-weight:500}
+.pagination button:hover{border-color:var(--gold);color:var(--gold)}
+.pagination button.active{background:var(--gold);border-color:var(--gold);color:#000;font-weight:600}
+.pagination button:disabled{opacity:.3;cursor:not-allowed}
+.banderin-section{background:#111110;padding:84px 24px 92px;border-top:1px solid rgba(255,255,255,.06)}
+.banderin-wrap{max-width:1180px;margin:0 auto}
+.banderin-layout{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:start;margin-bottom:48px}
+.banderin-label{display:inline-flex;align-items:center;gap:12px;font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:16px}
+.banderin-label::before{content:'';width:28px;height:1px;background:var(--gold)}
+.banderin-text h2{font-family:'Playfair Display',serif;font-size:clamp(32px,4.5vw,48px);line-height:1.05;font-weight:600;margin-bottom:18px}
+.banderin-text h2 em{font-style:italic;font-weight:500;color:var(--gold)}
+.banderin-text p{color:#a1a1aa;font-size:15.5px;line-height:1.75;font-weight:300;margin-bottom:14px;text-align:justify;text-justify:inter-word;hyphens:auto}
+.banderin-quote{margin-top:22px;padding:18px 20px;border-left:2px solid var(--gold);background:rgba(201,168,106,.07);border-radius:0 12px 12px 0;font-family:'Playfair Display',serif;font-style:italic;font-size:17px;line-height:1.5;color:#EDEDED}
+.banderin-quote span{display:block;margin-top:8px;font-family:'Inter',sans-serif;font-style:normal;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold)}
+.banderin-featured{position:relative;border-radius:18px;overflow:hidden;aspect-ratio:4/3.2;border:1px solid rgba(255,255,255,.1);cursor:pointer;background:#1a1a1a}
+.banderin-featured img,.banderin-featured video{width:100%;height:100%;object-fit:cover;display:block}
+.banderin-featured::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.45),transparent 40%)}
+.play-badge{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:2;width:72px;height:72px;border-radius:50%;display:grid;place-items:center;background:rgba(0,0,0,.55);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.35)}
+.play-badge::after{content:'';width:0;height:0;border-left:18px solid #fff;border-top:11px solid transparent;border-bottom:11px solid transparent;margin-left:4px}
+.featured-label{position:absolute;left:16px;bottom:14px;z-index:2;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#fff;background:rgba(0,0,0,.5);padding:7px 12px;border-radius:100px;border:1px solid rgba(255,255,255,.2)}
+.banderin-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.banderin-item{position:relative;overflow:hidden;border-radius:14px;aspect-ratio:1/1;cursor:pointer;background:#1a1a1a;border:1px solid rgba(255,255,255,.08)}
+.banderin-item img,.banderin-item video{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s}
+.banderin-item:hover img,.banderin-item:hover video{transform:scale(1.07)}
+.video-badge{position:absolute;top:10px;right:10px;z-index:2;background:rgba(0,0,0,.6);border:1px solid rgba(255,255,255,.25);backdrop-filter:blur(6px);padding:5px 10px;border-radius:100px;font-size:10px;letter-spacing:.14em;text-transform:uppercase}
+.video-badge::before{content:'▶ ';font-size:8px}
+.brujas-section{background:#0A0A0B;padding:84px 24px 92px;border-top:1px solid rgba(255,255,255,.06)}
+.brujas-wrap{max-width:860px;margin:0 auto}
+.brujas-header{text-align:center;max-width:700px;margin:0 auto 52px}
+.brujas-label{display:inline-flex;align-items:center;gap:12px;font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--gold);font-weight:600}
+.brujas-label::before,.brujas-label::after{content:'';width:28px;height:1px;background:var(--gold)}
+.brujas-header h2{font-family:'Playfair Display',serif;font-size:clamp(34px,5vw,52px);line-height:1.05;font-weight:600;margin:16px 0 18px}
+.brujas-header h2 em{font-style:italic;font-weight:500;color:var(--gold)}
+.brujas-header p{color:#a1a1aa;font-size:15.5px;line-height:1.75;font-weight:300;text-align:justify;text-justify:inter-word;hyphens:auto;margin-bottom:14px}
+.brujas-header p b{color:#fff}
+.brujas-date{margin-top:18px;display:inline-flex;align-items:center;gap:10px;padding:8px 16px;border:1px solid rgba(255,255,255,.1);border-radius:100px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.8);background:rgba(255,255,255,.03)}
+.brujas-date b{color:var(--gold)}
+.brujas-list{display:flex;flex-direction:column;gap:36px}
+.brujas-item{position:relative;overflow:hidden;border-radius:20px;aspect-ratio:16/10;cursor:pointer;background:#1a1a1a;border:1px solid rgba(255,255,255,.1)}
+.brujas-item img,.brujas-item video{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s}
+.brujas-item:hover img,.brujas-item:hover video{transform:scale(1.03)}
+.brujas-item::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.55),transparent 45%)}
+.brujas-caption{position:absolute;left:22px;right:22px;bottom:18px;z-index:2}
+.brujas-caption span{display:block;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+.brujas-caption strong{display:block;font-family:'Playfair Display',serif;font-size:clamp(20px,3vw,26px);font-weight:600;line-height:1.2;text-shadow:0 2px 14px rgba(0,0,0,.7)}
+.brujas-caption p{font-size:13.5px;line-height:1.6;color:rgba(255,255,255,.85);margin-top:6px;text-align:left}
+.brujas-num{position:absolute;top:16px;left:16px;z-index:2;background:rgba(0,0,0,.55);backdrop-filter:blur(8px);padding:6px 12px;border-radius:100px;font-size:11px;letter-spacing:.14em;border:1px solid rgba(255,255,255,.2)}
+.brujas-quote{margin-top:36px;padding:20px 22px;border-left:2px solid var(--gold);background:rgba(201,168,106,.07);border-radius:0 12px 12px 0;font-family:'Playfair Display',serif;font-style:italic;font-size:17px;line-height:1.5;color:#EDEDED;text-align:center}
+.brujas-quote span{display:block;margin-top:8px;font-family:'Inter',sans-serif;font-style:normal;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold)}
+/* ===== NUESTRA CLAUSURA - ESPACIO RESERVADO ===== */
+.clausura-section{background:#0B0B0C;padding:84px 24px 92px;border-top:1px solid rgba(255,255,255,.06)}
+.clausura-wrap{max-width:1180px;margin:0 auto}
+.clausura-header{text-align:center;max-width:700px;margin:0 auto 48px}
+.clausura-label{display:inline-flex;align-items:center;gap:12px;font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--gold);font-weight:600}
+.clausura-label::before,.clausura-label::after{content:'';width:28px;height:1px;background:var(--gold)}
+.clausura-header h2{font-family:'Playfair Display',serif;font-size:clamp(34px,5vw,52px);line-height:1.05;font-weight:600;margin:16px 0 18px}
+.clausura-header h2 em{font-style:italic;font-weight:500;color:var(--gold)}
+.clausura-header p{color:#a1a1aa;font-size:15.5px;line-height:1.75;font-weight:300;text-align:center;letter-spacing:.08em;text-transform:uppercase}
+.clausura-date{margin-top:18px;display:inline-flex;align-items:center;gap:10px;padding:8px 16px;border:1px dashed rgba(201,168,106,.6);border-radius:100px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.8);background:rgba(201,168,106,.05)}
+.clausura-date b{color:var(--gold)}
+.clausura-featured{position:relative;border-radius:20px;aspect-ratio:16/7;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;text-align:center;border:2px dashed rgba(255,255,255,.25);background:repeating-linear-gradient(45deg,rgba(255,255,255,.02) 0 12px,transparent 12px 24px),#141414;margin-bottom:14px}
+.clausura-featured .big-icon{font-size:52px;opacity:.7}
+.clausura-featured h3{font-family:'Playfair Display',serif;font-size:clamp(24px,4vw,34px);font-weight:600}
+.clausura-featured h3 em{font-style:italic;color:var(--gold)}
+.clausura-featured p{font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:rgba(255,255,255,.6)}
+.clausura-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.clausura-item{position:relative;overflow:hidden;border-radius:16px;aspect-ratio:4/3.4;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center;border:2px dashed rgba(255,255,255,.22);background:#141414;padding:16px}
+.clausura-item .mini-icon{font-size:32px;opacity:.6}
+.clausura-item strong{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:#fff}
+.clausura-item span{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.5)}
+.clausura-note{margin-top:28px;text-align:center;font-family:'Playfair Display',serif;font-style:italic;font-size:17px;color:#EDEDED}
+.clausura-note span{display:block;margin-top:8px;font-family:'Inter',sans-serif;font-style:normal;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold)}
+.lightbox{position:fixed;inset:0;background:rgba(0,0,0,.92);backdrop-filter:blur(10px);z-index:100;display:none;align-items:center;justify-content:center;padding:20px}
+.lightbox.open{display:flex}
+.lightbox img,.lightbox video{max-width:92vw;max-height:82vh;object-fit:contain;border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,.6);display:none}
+.lightbox img.active,.lightbox video.active{display:block}
+.lightbox-close{position:absolute;top:20px;right:20px;width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.08);color:#fff;font-size:20px;cursor:pointer;z-index:2}
+.lightbox-nav{position:absolute;bottom:24px;display:flex;gap:12px;align-items:center;z-index:2}
+.lightbox-nav button{width:42px;height:42px;border-radius:50%;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.08);color:#fff;cursor:pointer;font-size:18px}
+.lightbox-nav span{font-size:13px;color:rgba(255,255,255,.8);letter-spacing:.1em}
+@media(max-width:900px){.gallery-grid{grid-template-columns:repeat(3,1fr)}.banderin-layout{grid-template-columns:1fr;gap:28px}.banderin-grid{grid-template-columns:repeat(3,1fr)}.clausura-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:640px){.gallery-section,.banderin-section,.brujas-section,.clausura-section{padding:64px 16px 70px}.gallery-grid,.banderin-grid{grid-template-columns:repeat(2,1fr);gap:10px}.brujas-item{aspect-ratio:4/3.4;border-radius:14px}.brujas-caption{left:16px;right:16px;bottom:14px}.clausura-featured{aspect-ratio:4/3}.clausura-grid{grid-template-columns:1fr 1fr}.hero-center{min-height:28vh}.hero img{object-position:center 30%}.hero-top{padding-top:22px}.hero-bottom{padding-bottom:26px}.gallery-header p,.banderin-text p,.brujas-header p{text-align:left}}
+</style>
+</head>
+<body>
+<header class="hero" id="inicio"><img src="img/port.jpg" alt="Graduación del curso"><div class="hero-top"><div class="hero-eyebrow">XVI BRE 2026</div></div><div class="hero-center"></div><div class="hero-bottom"><p>Firmes en el deber, inquebrantables en el honor, orgullosos de nuestra misión, al servicio de la nación.</p><div class="hero-meta"><span><b>XVI</b> BRIGADA <b>2026</b></span><i></i><span><b>BRIGADA DE RESPUESTA A EMERGENCIAS</b></span><i></i><span>Acapulco, Guerrero.</span></div><button class="scroll-indicator" onclick="document.getElementById('galeria').scrollIntoView({behavior:'smooth'})"><div class="scroll-arrow"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg></div></button></div></header>
+
+<section class="gallery-section" id="galeria"><div class="gallery-wrap"><div class="gallery-header"><img src="img/logo.jpg" alt="" width="45%"><h2>Cuando todo <em>comenzó</em></h2><p>Como olvidar el primer día que estuvimos en este maravilloso curos, muchos eramos de distintos lugares de la República Mexicana, había caras conocidas para algunos, pero en su mayoría, eramos totales desconocidos con una única visión: Convertirnos en la XVI BRIGADA DE RESPUESTA A EMERGENCIAS, llevandonos todo el conocimiento posible para servir a nuestra GRAN NACIÓN.</p><div class="gallery-date">Recuerdos de la&nbsp;•&nbsp; <b>XVI BRE</b></div></div><div class="gallery-grid" id="galleryGrid"></div><div class="pagination" id="cap1Pagination"><button id="cap1Prev">‹</button><button data-page="1" class="active">1</button><button data-page="2">2</button><button data-page="3">3</button><button id="cap1Next">›</button></div></div></section>
+
+<section class="banderin-section" id="banderin"><div class="banderin-wrap"><div class="banderin-layout"><div class="banderin-text"><div class="banderin-label">Capítulo 02 • Símbolo de la Brigada</div><h2>La historia del <em>banderín</em></h2><p>Todo banderín tiene una historia, y el nuestro no es la excepción. Nació de una idea entre compañeros, de esas que surgen en una noche de guardia, entre risas, cansancio y el orgullo de pertenecer a la <b>XVI Brigada de Respuesta a Emergencias</b>.</p><p>Sin tener una idea muy clara, el poderodisimo garrobo salió como símbolo de nuestra unión.</p><p>El banderín nos acompañó en cada formación, en cada práctica y en cada momento importante, si es que no lo olvidamos o nos lo "quitan" nuestros instructores.</p><div class="banderin-quote">“El banderín no se carga con las manos, se carga con el corazón.”<span>XVI BRE • 2026</span></div></div><div class="banderin-featured" data-type="video" data-src="img/vid/vid2.mp4" data-poster="img/vid/vid2.gif"><video src="img/vid/vid2.mp4" muted playsinline preload="metadata" poster="img/vid/vid2.gif"></video><div class="play-badge"></div><div class="featured-label">Banderín Final</div></div></div><div class="banderin-grid"><figure class="banderin-item" data-type="video" data-src="img/vid/vid1.mp4" data-poster="img/vid/vid1.gif"><video src="img/vid/vid1.mp4" muted playsinline preload="metadata" poster="img/vid/vid1.gif"></video><span class="video-badge">Video</span></figure><figure class="banderin-item" data-type="image" data-src="img/cap2/img1.png"><img src="img/cap2/img1.png" alt="Banderín 1"></figure><figure class="banderin-item" data-type="image" data-src="img/cap2/img2.png"><img src="img/cap2/img2.png" alt="Banderín 2"></figure><figure class="banderin-item" data-type="video" data-src="img/vid/vid3.mp4" data-poster="img/vid/vid3.gif"><video src="img/vid/vid3.mp4" muted playsinline preload="metadata" poster="img/vid/vid3.gif"></video><span class="video-badge">Video</span></figure><figure class="banderin-item" data-type="image" data-src="img/cap2/img3.png"><img src="img/cap2/img3.png" alt="Banderín 3"></figure><figure class="banderin-item" data-type="image" data-src="img/cap2/img4.png"><img src="img/cap2/img4.png" alt="Banderín 4"></figure><figure class="banderin-item" data-type="image" data-src="img/cap2/img5.png"><img src="img/cap2/img5.png" alt="Banderín 5"></figure><figure class="banderin-item" data-type="image" data-src="img/cap2/img6.png"><img src="img/cap2/img6.png" alt="Banderín 6"></figure></div></div></section>
+
+<section class="brujas-section" id="brujas"><div class="brujas-wrap">
+<div class="brujas-header"><div class="brujas-label">Capítulo 03 • La Prueba</div><h2>La casería de <em>brujas</em></h2>
+<p>No todos sabíamos lo que sería la llamada <b>casería de brujas</b>. Para algunos era solo un nombre, para otros un rumor que corría entre pasillos. Lo que nadie imaginaba es que esa noche no sería de descanso, sería la noche en la que todo lo que habíamos aprendido en clases se pondría a prueba de verdad.</p>
+<p>Sin avisar, sin guion, con cansancio acumulado y con la adrenalina al tope, tuvimos que reaccionar como una sola brigada. Ahí entendimos que la teoría ya no bastaba: era momento de demostrar disciplina, trabajo en equipo y temple. <b>Ahí dejamos de ser alumnos y empezamos a ser XVI BRE.</b></p>
+<div class="brujas-date">La Prueba Final • <b>XVI BRE</b></div></div>
+<div class="brujas-list">
+<figure class="brujas-item" data-type="video" data-src="img/vid/brujas1.mp4" data-poster="img/vid/brujas1.gif"><video src="img/vid/brujas1.mp4" muted playsinline preload="metadata" poster="img/vid/brujas1.gif"></video><span class="brujas-num">01 / 12</span><span class="video-badge">Video</span><figcaption class="brujas-caption"><span></span><strong>Primera Víctima</strong><p>Nuestra primera víctima en el ACV.</p></figcaption></figure>
+<figure class="brujas-item" data-type="image" data-src="img/cap3/img1.png"><img src="img/cap3/img1.png" alt="Casería de brujas 1"><span class="brujas-num">02 / 12</span><figcaption class="brujas-caption"><span></span><strong></strong><p>Atención en el ACV.</p></figcaption></figure>
+<figure class="brujas-item" data-type="image" data-src="img/cap3/img2.png"><img src="img/cap3/img2.png" alt="Casería de brujas 2"><span class="brujas-num">03 / 12</span><figcaption class="brujas-caption"><span></span><strong></strong><p>Víctima de deslave en el canal.</p></figcaption></figure>
+<figure class="brujas-item" data-type="video" data-src="img/vid/brujas2.mp4" data-poster="img/vid/brujas2.gif"><video src="img/vid/brujas2.mp4" muted playsinline preload="metadata" poster="img/vid/brujas2.gif"></video><span class="brujas-num">04 / 12</span><span class="video-badge">Video</span><figcaption class="brujas-caption"><span></span><strong></strong><p>Un vistazo a nuestro PC, E Y ACV.</p></figcaption></figure>
+<figure class="brujas-item" data-type="image" data-src="img/cap3/img3.png"><img src="img/cap3/img3.png" alt="Casería de brujas 3"><span class="brujas-num">05 / 12</span><figcaption class="brujas-caption"><span></span><strong></strong><p>Trabajo en equipo en todo momento.</p></figcaption></figure>
+<figure class="brujas-item" data-type="image" data-src="img/cap3/img4.png"><img src="img/cap3/img4.png" alt="Casería de brujas 4"><span class="brujas-num">06 / 12</span><figcaption class="brujas-caption"><span></span><strong></strong><p>Trabajando en el PC.</p></figcaption></figure>
+<figure class="brujas-item" data-type="image" data-src="img/cap3/img5.png"><img src="img/cap3/img5.png" alt="Casería de brujas 5"><span class="brujas-num">07 / 12</span><figcaption class="brujas-caption"><span></span><strong></strong><p>Limpieza del canal.</p></figcaption></figure>
+<figure class="brujas-item" data-type="image" data-src="img/cap3/img6.png"><img src="img/cap3/img6.png" alt="Casería de brujas 6"><span class="brujas-num">08 / 12</span><figcaption class="brujas-caption"><span></span><strong></strong><p>Nuestro pañolero de fibra entregando lo necesario.</p></figcaption></figure>
+<figure class="brujas-item" data-type="image" data-src="img/cap3/img7.png"><img src="img/cap3/img7.png" alt="Casería de brujas 7"><span class="brujas-num">09 / 12</span><figcaption class="brujas-caption"><span></span><strong></strong><p></p></figcaption></figure>
+<figure class="brujas-item" data-type="image" data-src="img/cap3/img8.png"><img src="img/cap3/img8.png" alt="Casería de brujas 8"><span class="brujas-num">10 / 12</span><figcaption class="brujas-caption"><span></span><strong></strong><p>Una sola entrada y salida resguardada por el equipo del Oficial de Seguridad.</p></figcaption></figure>
+<figure class="brujas-item" data-type="image" data-src="img/cap3/img10.png"><img src="img/cap3/img10.png" alt="Casería de brujas 9"><span class="brujas-num">11 / 12</span><figcaption class="brujas-caption"><span></span><strong></strong><p></p></figcaption></figure>
+<figure class="brujas-item" data-type="image" data-src="img/cap3/img9.png"><img src="img/cap3/img9.png" alt="Casería de brujas 10"><span class="brujas-num">12 / 12</span><figcaption class="brujas-caption"><span></span><strong></strong><p>Puesto de Comando.</p></figcaption></figure>
+</div>
+<div class="brujas-quote">“Esa noche no nos asustaron las brujas, nos hizo fuertes la prueba.”<span>XVI BRE • 2026</span></div>
+</div></section>
+
+<!-- NUESTRA CLAUSURA - ESPACIO RESERVADO -->
+<section class="clausura-section" id="clausura"><div class="clausura-wrap">
+<div class="clausura-header"><div class="clausura-label">Capítulo 04 • El Final</div><h2>Nuestra <em>clausura</em></h2><p>Espacio reservado</p><div class="clausura-date">Próximamente • <b>XVI BRE</b></div></div>
+<div class="clausura-featured"><div class="big-icon"></div><h3>Espacio <em>reservado</em></h3><p>Foto / Video</p></div>
+<div class="clausura-grid">
+<div class="clausura-item"><div class="mini-icon"></div><strong>Espacio reservado</strong><span>Foto 01</span></div>
+<div class="clausura-item"><div class="mini-icon"></div><strong>Espacio reservado</strong><span>Foto 02</span></div>
+<div class="clausura-item"><div class="mini-icon"></div><strong>Espacio reservado</strong><span>Video 01</span></div>
+<div class="clausura-item"><div class="mini-icon"></div><strong>Espacio reservado</strong><span>Foto 03</span></div>
+<div class="clausura-item"><div class="mini-icon"></div><strong>Espacio reservado</strong><span>Foto 04</span></div>
+<div class="clausura-item"><div class="mini-icon"></div><strong>Espacio reservado</strong><span>Video 02</span></div>
+</div>
+<div class="clausura-note">“Espacio reservado para el día que nos graduamos.”<span>XVI BRE • 2026</span></div>
+</div></section>
+
+<div class="lightbox" id="lightbox"><button class="lightbox-close" id="closeBtn">×</button><img id="lightboxImg" src="" alt=""><video id="lightboxVideo" src="" controls playsinline></video><div class="lightbox-nav"><button id="prevBtn">‹</button><span id="lightboxCounter">1 / 8</span><button id="nextBtn">›</button></div></div>
+<script>
+const cap1Pages={1:[{type:'image',src:'img/cap1/img1.png'},{type:'image',src:'img/cap1/img2.png'},{type:'image',src:'img/cap1/img3.png'},{type:'image',src:'img/cap1/img4.png'},{type:'image',src:'img/cap1/img5.png'},{type:'image',src:'img/cap1/img6.png'},{type:'video',src:'img/vid/vid4.mp4',poster:'img/vid/vid4.jpg'},{type:'image',src:'img/cap1/img8.png'}],2:[{type:'image',src:'img/cap1/img9.png'},{type:'image',src:'img/cap1/img10.png'},{type:'video',src:'img/vid/vid5.mp4',poster:'img/vid/vid5.gif'},{type:'image',src:'img/cap1/img11.png'},{type:'image',src:'img/cap1/img12.png'},{type:'image',src:'img/cap1/img13.png'},{type:'image',src:'img/cap1/img14.png'},{type:'image',src:'img/cap1/img15.png'}],3:[{type:'image',src:'img/cap1/img16.png'},{type:'image',src:'img/cap1/img17.png'},{type:'image',src:'img/cap1/img18.png'},{type:'image',src:'img/cap1/img19.png'},{type:'image',src:'img/cap1/img20.png'},{type:'image',src:'img/cap1/img21.png'},{type:'image',src:'img/cap1/img22.png'},{type:'image',src:'img/cap1/img23.png'}]};
+let cap1CurrentPage=1;const galleryGrid=document.getElementById('galleryGrid');const paginationBtns=document.querySelectorAll('#cap1Pagination button[data-page]');const prevBtnPag=document.getElementById('cap1Prev');const nextBtnPag=document.getElementById('cap1Next');
+function renderCap1Page(page){cap1CurrentPage=page;galleryGrid.innerHTML='';cap1Pages[page].forEach((item)=>{const fig=document.createElement('figure');fig.className='gallery-item';fig.dataset.type=item.type;fig.dataset.src=item.src;fig.dataset.poster=item.poster||'';if(item.type==='video'){fig.innerHTML='<video src="'+item.src+'" '+(item.poster?'poster="'+item.poster+'"':'')+' muted playsinline preload="metadata"></video><span class="video-badge">Video</span>';}else{fig.innerHTML='<img src="'+item.src+'" alt="Recuerdo pagina '+page+'">';}galleryGrid.appendChild(fig);});paginationBtns.forEach(b=>b.classList.toggle('active',Number(b.dataset.page)===page));prevBtnPag.disabled=page===1;nextBtnPag.disabled=page===3;rebuildLightboxItems();}
+function goToCap1Page(page){if(page<1)page=1;if(page>3)page=3;renderCap1Page(page);}
+paginationBtns.forEach(b=>b.addEventListener('click',()=>goToCap1Page(Number(b.dataset.page))));prevBtnPag.addEventListener('click',()=>goToCap1Page(cap1CurrentPage-1));nextBtnPag.addEventListener('click',()=>goToCap1Page(cap1CurrentPage+1));
+const lightbox=document.getElementById('lightbox');const lightboxImg=document.getElementById('lightboxImg');const lightboxVideo=document.getElementById('lightboxVideo');const counter=document.getElementById('lightboxCounter');let lightboxItems=[];let current=0;
+function rebuildLightboxItems(){const cap1Els=[...document.querySelectorAll('.gallery-item')].map(el=>({type:el.dataset.type,src:el.dataset.src,poster:el.dataset.poster,el}));const banderinEls=[...document.querySelectorAll('.banderin-featured, .banderin-item')].map(el=>({type:el.dataset.type,src:el.dataset.src,poster:el.dataset.poster||'',el}));const brujasEls=[...document.querySelectorAll('.brujas-item')].map(el=>({type:el.dataset.type,src:el.dataset.src,poster:el.dataset.poster||'',el}));lightboxItems=[...cap1Els,...banderinEls,...brujasEls];lightboxItems.forEach((item,i)=>{item.el.onclick=()=>openLightbox(i);});}
+function openLightbox(i){current=i;show(current);lightbox.classList.add('open');document.body.style.overflow='hidden';}
+function closeLightbox(){lightbox.classList.remove('open');lightboxVideo.pause();lightboxVideo.classList.remove('active');lightboxImg.classList.remove('active');document.body.style.overflow='';}
+function show(n){current=(n+lightboxItems.length)%lightboxItems.length;const item=lightboxItems[current];counter.textContent=(current+1)+' / '+lightboxItems.length;if(item.type==='video'){lightboxImg.classList.remove('active');lightboxVideo.src=item.src;if(item.poster)lightboxVideo.poster=item.poster;lightboxVideo.classList.add('active');lightboxVideo.play();}else{lightboxVideo.pause();lightboxVideo.classList.remove('active');lightboxImg.src=item.src;lightboxImg.classList.add('active');}}
+document.getElementById('closeBtn').onclick=closeLightbox;document.getElementById('prevBtn').onclick=(e)=>{e.stopPropagation();show(current-1);};document.getElementById('nextBtn').onclick=(e)=>{e.stopPropagation();show(current+1);};lightbox.onclick=(e)=>{if(e.target===lightbox)closeLightbox();};document.addEventListener('keydown',e=>{if(!lightbox.classList.contains('open'))return;if(e.key==='Escape')closeLightbox();if(e.key==='ArrowRight')show(current+1);if(e.key==='ArrowLeft')show(current-1);});
+renderCap1Page(1);
+const heroImg=document.querySelector('.hero img');window.addEventListener('scroll',()=>{const y=window.scrollY;if(y<window.innerHeight){heroImg.style.transform='translateY('+(y*0.25)+'px) scale(1)';}},{passive:true});
+</script>
+</body>
+</html>
